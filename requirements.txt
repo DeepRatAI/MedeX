@@ -1,6 +1,9 @@
 # MedeX - Medical AI Intelligence System
 # Core dependencies for medical AI functionality
 
+# OpenAI-compatible API client (for Moonshot Kimi)
+openai>=1.3.0
+
 # AI and Machine Learning
 torch>=1.9.0
 transformers>=4.21.0
