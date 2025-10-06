@@ -2,6 +2,7 @@
 config.json
 *.key
 *.secret
+api_key.txt
 
 # Python
 __pycache__/

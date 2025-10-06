@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedeX - Sistema Avanzado de IA Médica</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="medical-cross">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <h2>Inicializando MedeX</h2>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-text">Cargando sistema de IA médica...</p>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="app" class="app-container" style="display: none;">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>MedeX</h1>
+                        <span class="version">v25.83</span>
+                    </div>
+                </div>
+                <div class="header-status">
+                    <div class="status-indicator">
+                        <span class="status-dot online"></span>
+                        <span class="status-text">Sistema Activo</span>
+                    </div>
+                    <div class="header-actions">
+                        <button class="icon-button" id="settings-btn" title="Configuración">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <button class="icon-button" id="info-btn" title="Información">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2><i class="fas fa-comments-medical"></i> Conversaciones</h2>
+                    <button class="btn-new-chat" id="new-chat-btn">
+                        <i class="fas fa-plus"></i> Nueva Consulta
+                    </button>
+                </div>
+                
+                <div class="chat-history" id="chat-history">
+                    <!-- Chat history items will be dynamically added here -->
+                    <div class="empty-state">
+                        <i class="fas fa-comment-medical"></i>
+                        <p>No hay consultas previas</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-footer">
+                    <div class="session-stats">
+                        <h3><i class="fas fa-chart-line"></i> Estadísticas</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Consultas:</span>
+                            <span class="stat-value" id="stat-queries">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Emergencias:</span>
+                            <span class="stat-value emergency" id="stat-emergencies">0</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <section class="chat-area">
+                <!-- Welcome Screen -->
+                <div class="welcome-screen" id="welcome-screen">
+                    <div class="welcome-content">
+                        <div class="welcome-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h2>Bienvenido a MedeX</h2>
+                        <p class="welcome-subtitle">Sistema Avanzado de Inteligencia Artificial Médica</p>
+                        
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h3>Detección Inteligente</h3>
+                                <p>Identifica automáticamente profesionales y pacientes</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon emergency">
+                                    <i class="fas fa-ambulance"></i>
+                                </div>
+                                <h3>Protocolos de Emergencia</h3>
+                                <p>Reconocimiento automático de situaciones críticas</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-book-medical"></i>
+                                </div>
+                                <h3>Base de Conocimiento</h3>
+                                <p>Información médica verificada y actualizada</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h3>Seguridad Médica</h3>
+                                <p>Disclaimers y protocolos de seguridad integrados</p>
+                            </div>
+                        </div>
+
+                        <div class="example-queries">
+                            <h3>Ejemplos de Consultas</h3>
+                            <div class="query-examples">
+                                <button class="example-btn professional" data-example="Paciente masculino 65 años, diabético, presenta dolor precordial opresivo de 2 horas de evolución">
+                                    <i class="fas fa-user-md"></i>
+                                    <div>
+                                        <strong>Consulta Profesional</strong>
+                                        <span>Caso clínico estructurado</span>
+                                    </div>
+                                </button>
+                                <button class="example-btn patient" data-example="Me duele el pecho y estoy preocupado, ¿es grave?">
+                                    <i class="fas fa-user"></i>
+                                    <div>
+                                        <strong>Consulta Paciente</strong>
+                                        <span>Pregunta sobre síntomas</span>
+                                    </div>
+                                </button>
+                                <button class="example-btn educational" data-example="¿Qué es la diabetes tipo 2 y cuáles son sus complicaciones?">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <div>
+                                        <strong>Consulta Educativa</strong>
+                                        <span>Información médica general</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="disclaimer">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Aviso Médico:</strong> Esta herramienta es de apoyo educativo. No reemplaza la evaluación médica profesional. En emergencias, llame al 911.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Messages -->
+                <div class="chat-messages" id="chat-messages" style="display: none;">
+                    <!-- Messages will be dynamically added here -->
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-area" id="input-area" style="display: none;">
+                    <div class="input-container">
+                        <textarea 
+                            id="user-input" 
+                            class="user-input" 
+                            placeholder="Describe tu consulta médica aquí..."
+                            rows="1"
+                        ></textarea>
+                        <div class="input-actions">
+                            <button class="icon-button" id="attach-btn" title="Adjuntar imagen (próximamente)">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                            <button class="btn-send" id="send-btn" disabled>
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Enviar</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="input-hints">
+                        <span class="hint"><i class="fas fa-lightbulb"></i> Presiona Enter para enviar, Shift+Enter para nueva línea</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="info-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-info-circle"></i> Acerca de MedeX</h2>
+                <button class="close-modal" data-modal="info-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="info-section">
+                    <h3>🏥 Sistema Avanzado de IA Médica</h3>
+                    <p>MedeX v25.83 es un sistema de inteligencia artificial médica que combina:</p>
+                    <ul>
+                        <li><strong>Detección Automática:</strong> Identifica el tipo de usuario y adapta las respuestas</li>
+                        <li><strong>Base de Conocimiento:</strong> Información médica verificada con ICD-10</li>
+                        <li><strong>Protocolos de Emergencia:</strong> Reconocimiento automático de situaciones críticas</li>
+                        <li><strong>IA Avanzada:</strong> Powered by Kimi K2-0711-Preview</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h3>🎯 Capacidades del Sistema</h3>
+                    <ul>
+                        <li>Consultas médicas profesionales y educativas</li>
+                        <li>Información farmacológica y de medicamentos</li>
+                        <li>Protocolos clínicos y guías de tratamiento</li>
+                        <li>Detección de emergencias médicas</li>
+                    </ul>
+                </div>
+                <div class="info-section warning">
+                    <h3>⚠️ Disclaimer Médico</h3>
+                    <p>Este sistema es una herramienta de apoyo educativo y NO reemplaza la evaluación médica profesional. Siempre consulte con un profesional de la salud para diagnósticos y tratamientos. En caso de emergencia, llame al 911 inmediatamente.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-cog"></i> Configuración</h2>
+                <button class="close-modal" data-modal="settings-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3>Preferencias de Interfaz</h3>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="dark-mode-toggle">
+                            Modo Oscuro (próximamente)
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="sound-toggle" checked>
+                            Sonidos de Notificación
+                        </label>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h3>Estado del Sistema</h3>
+                    <div class="system-status">
+                        <div class="status-item">
+                            <span>Motor IA:</span>
+                            <span class="status-badge online">Activo</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Base Conocimiento:</span>
+                            <span class="status-badge online">Cargada</span>
+                        </div>
+                        <div class="status-item">
+                            <span>API Kimi:</span>
+                            <span class="status-badge online" id="api-status">Conectado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
