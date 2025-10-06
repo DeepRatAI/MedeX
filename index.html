@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedeX v25.83 - Sistema Médico de IA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="48" height="48" rx="12" fill="white" fill-opacity="0.2"/>
+                        <path d="M24 10V38M14 24H34" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="24" cy="24" r="3" fill="white"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>MedeX <span class="version">v25.83</span></h1>
+                    <p class="subtitle">Sistema Médico de Inteligencia Artificial</p>
+                </div>
+            </div>
+            <div class="header-info">
+                <div class="info-badge">
+                    <span class="badge-label">Motor IA:</span>
+                    <span class="badge-value">Kimi K2-0711-Preview</span>
+                </div>
+                <div class="info-badge">
+                    <span class="badge-label">Estado:</span>
+                    <span class="badge-value status-active">●  Activo</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">🎯 Modos de Operación</h3>
+                <div class="mode-selector">
+                    <div class="mode-option" data-mode="auto">
+                        <div class="mode-icon">🤖</div>
+                        <div class="mode-info">
+                            <div class="mode-name">Detección Automática</div>
+                            <div class="mode-desc">El sistema detecta el tipo de consulta</div>
+                        </div>
+                        <div class="mode-indicator active"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">📊 Estadísticas de Sesión</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">Consultas</div>
+                        <div class="stat-value" id="stat-queries">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Profesionales</div>
+                        <div class="stat-value" id="stat-professional">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Educativas</div>
+                        <div class="stat-value" id="stat-educational">0</div>
+                    </div>
+                    <div class="stat-item emergency">
+                        <div class="stat-label">Emergencias</div>
+                        <div class="stat-value" id="stat-emergencies">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">🛠️ Acciones</h3>
+                <button class="action-button" id="clear-chat">
+                    <span class="button-icon">🧹</span>
+                    <span>Limpiar Historial</span>
+                </button>
+                <button class="action-button" id="export-chat">
+                    <span class="button-icon">💾</span>
+                    <span>Exportar Conversación</span>
+                </button>
+            </div>
+
+            <div class="sidebar-section disclaimer">
+                <h3 class="sidebar-title">⚠️ Importante</h3>
+                <p class="disclaimer-text">
+                    MedeX es una herramienta de apoyo médico. Siempre consulte con 
+                    profesionales de la salud para decisiones médicas importantes.
+                </p>
+            </div>
+        </aside>
+
+        <!-- Chat Area -->
+        <main class="chat-section">
+            <!-- Welcome Screen -->
+            <div class="welcome-screen" id="welcome-screen">
+                <div class="welcome-content">
+                    <div class="welcome-icon">
+                        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="120" height="120" rx="24" fill="url(#gradient1)"/>
+                            <path d="M60 25V95M35 60H85" stroke="white" stroke-width="10" stroke-linecap="round"/>
+                            <circle cx="60" cy="60" r="8" fill="white"/>
+                            <defs>
+                                <linearGradient id="gradient1" x1="0" y1="0" x2="120" y2="120">
+                                    <stop offset="0%" stop-color="#667eea"/>
+                                    <stop offset="100%" stop-color="#764ba2"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h2 class="welcome-title">Bienvenido a MedeX v25.83</h2>
+                    <p class="welcome-subtitle">Sistema Médico de Inteligencia Artificial con Detección Automática</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🧠</div>
+                            <div class="feature-title">Detección Inteligente</div>
+                            <div class="feature-desc">Distingue automáticamente entre consultas profesionales y educativas</div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🚨</div>
+                            <div class="feature-title">Protocolo de Emergencias</div>
+                            <div class="feature-desc">Reconocimiento inmediato de situaciones médicas urgentes</div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <div class="feature-title">Base RAG Médica</div>
+                            <div class="feature-desc">Conocimiento médico actualizado con referencias científicas</div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <div class="feature-title">Respuestas en Tiempo Real</div>
+                            <div class="feature-desc">Streaming progresivo para respuestas instantáneas</div>
+                        </div>
+                    </div>
+
+                    <div class="example-queries">
+                        <h3>Ejemplos de consultas:</h3>
+                        <div class="examples-list">
+                            <button class="example-query" data-query="Paciente masculino de 45 años con dolor torácico opresivo de 2 horas de evolución, irradiado a brazo izquierdo y mandíbula. Diaforesis presente. TA: 150/95 mmHg, FC: 110 lpm.">
+                                👨‍⚕️ Caso clínico: Dolor torácico en adulto
+                            </button>
+                            <button class="example-query" data-query="¿Qué son los antiinflamatorios no esteroideos (AINEs) y cuál es su mecanismo de acción?">
+                                🎓 ¿Qué son los AINEs y cómo funcionan?
+                            </button>
+                            <button class="example-query" data-query="¿Cuáles son los criterios diagnósticos de diabetes mellitus tipo 2 según la ADA?">
+                                📋 Criterios diagnósticos de diabetes mellitus
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will be appended here -->
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-container">
+                    <textarea 
+                        id="user-input" 
+                        placeholder="Escribe tu consulta médica aquí... (profesional o educativa)"
+                        rows="3"
+                    ></textarea>
+                    <div class="input-actions">
+                        <div class="input-info">
+                            <span class="char-count" id="char-count">0 caracteres</span>
+                        </div>
+                        <button class="send-button" id="send-button">
+                            <span class="button-text">Enviar</span>
+                            <span class="button-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="modal" id="loading-modal">
+        <div class="modal-content">
+            <div class="loader"></div>
+            <p class="loading-text">Procesando consulta...</p>
+            <p class="loading-subtext" id="loading-status">Analizando tipo de consulta</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
