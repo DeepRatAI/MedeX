@@ -3,6 +3,9 @@ config.json
 *.key
 *.secret
 
+# API Keys (keep api_key.txt for local development)
+# api_key.txt will be used locally but ignored in HF Spaces
+
 # Python
 __pycache__/
 *.py[cod]
@@ -38,6 +41,7 @@ env/
 .cache/
 temp/
 tmp/
+rag_cache/
 
 # IDE and Editor files
 .vscode/
@@ -60,3 +64,13 @@ patient_data/
 medical_records/
 *.dicom
 *.dcm
+
+# Node modules (if any frontend tools are added)
+node_modules/
+package-lock.json
+
+# Test files
+.pytest_cache/
+.coverage
+htmlcov/
+

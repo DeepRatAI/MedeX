@@ -794,6 +794,76 @@ PROTOCOLO DE FILTRADO OBLIGATORIO INICIAL:
             ]
         }
     
+    async def generate_response_stream(self, query: str):
+        """Generador de respuestas con streaming para API web"""
+        # Analizar query
+        user_type = self.detect_user_type(query)
+        is_emergency = self.detect_emergency(query)
+        
+        # Actualizar estadísticas
+        self.session_stats['queries'] += 1
+        if is_emergency:
+            self.session_stats['emergencies'] += 1
+        if user_type == "Professional":
+            self.session_stats['professional_queries'] += 1
+        else:
+            self.session_stats['educational_queries'] += 1
+        
+        # Crear system prompt
+        system_prompt = self.create_system_prompt(user_type, is_emergency)
+        
+        # Configurar herramientas
+        tools = None
+        if not is_emergency:
+            tools = [
+                {
+                    "type": "builtin_function",
+                    "function": {
+                        "name": "web_search"
+                    }
+                }
+            ]
+        
+        # Agregar mensaje al historial
+        self.conversation_history.append({
+            "role": "user",
+            "content": query
+        })
+        
+        # Preparar mensajes
+        messages = [
+            {"role": "system", "content": system_prompt},
+            *self.conversation_history[-10:]  # Últimos 10 mensajes
+        ]
+        
+        # Streaming
+        try:
+            response = self.client.chat.completions.create(
+                model="kimi-k2-0711-preview",
+                messages=messages,
+                temperature=0.3,
+                stream=True,
+                tools=tools
+            )
+            
+            full_response = ""
+            for chunk in response:
+                if chunk.choices and len(chunk.choices) > 0:
+                    delta = chunk.choices[0].delta
+                    if hasattr(delta, 'content') and delta.content:
+                        full_response += delta.content
+                        yield delta.content
+            
+            # Agregar respuesta al historial
+            self.conversation_history.append({
+                "role": "assistant",
+                "content": full_response
+            })
+            
+        except Exception as e:
+            error_msg = f"❌ Error: {e}"
+            yield error_msg
+    
     def clear_history(self):
         """Limpia el historial conversacional"""
         self.conversation_history.clear()

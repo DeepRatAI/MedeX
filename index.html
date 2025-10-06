@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedeX - Sistema Avanzado de IA Médica</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>MedeX</h1>
+                    <span class="version">v25.83</span>
+                </div>
+            </div>
+            <div class="header-info">
+                <div class="status-indicator">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span class="status-text" id="statusText">Conectando...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Welcome Section -->
+            <section class="welcome-section" id="welcomeSection">
+                <div class="welcome-card">
+                    <div class="welcome-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h2>Bienvenido a MedeX</h2>
+                    <p class="welcome-subtitle">Sistema Avanzado de IA Médica</p>
+                    <p class="welcome-description">
+                        MedeX utiliza inteligencia artificial avanzada (Kimi K2-0711-Preview) para proporcionar 
+                        información médica precisa, adaptándose automáticamente según tu perfil profesional.
+                    </p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-user-md"></i>
+                            <h3>Detección Inteligente</h3>
+                            <p>Adapta las respuestas automáticamente según tu perfil</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Emergencias</h3>
+                            <p>Protocolos automáticos para situaciones críticas</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-brain"></i>
+                            <h3>RAG Avanzado</h3>
+                            <p>Base de conocimiento médico integrada</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-stream"></i>
+                            <h3>Tiempo Real</h3>
+                            <p>Respuestas progresivas con streaming</p>
+                        </div>
+                    </div>
+
+                    <div class="disclaimer-box">
+                        <i class="fas fa-info-circle"></i>
+                        <p><strong>Importante:</strong> MedeX es una herramienta de apoyo educativo e informativo. 
+                        No reemplaza la consulta médica profesional. En caso de emergencia real, contacta servicios 
+                        de emergencia inmediatamente.</p>
+                    </div>
+
+                    <button class="btn-primary btn-large" onclick="startChat()">
+                        <i class="fas fa-comments"></i>
+                        Iniciar Consulta
+                    </button>
+                </div>
+            </section>
+
+            <!-- Chat Section -->
+            <section class="chat-section" id="chatSection" style="display: none;">
+                <div class="chat-container">
+                    <!-- Chat Header -->
+                    <div class="chat-header">
+                        <div class="chat-header-left">
+                            <button class="btn-icon" onclick="returnToWelcome()" title="Volver al inicio">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                            <div class="chat-header-info">
+                                <h3>Consulta Médica</h3>
+                                <span class="chat-mode" id="chatMode">Modo: Detectando...</span>
+                            </div>
+                        </div>
+                        <div class="chat-header-right">
+                            <button class="btn-icon" onclick="clearChat()" title="Nueva consulta">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                            <button class="btn-icon" onclick="toggleStats()" title="Estadísticas">
+                                <i class="fas fa-chart-bar"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Alert -->
+                    <div class="emergency-alert" id="emergencyAlert" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <div class="emergency-content">
+                            <strong>⚠️ EMERGENCIA DETECTADA</strong>
+                            <p>Si esto es una emergencia real, llama al 911 o acude al servicio de urgencias más cercano inmediatamente.</p>
+                        </div>
+                    </div>
+
+                    <!-- Stats Panel -->
+                    <div class="stats-panel" id="statsPanel" style="display: none;">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Consultas</span>
+                                <span class="stat-value" id="statQueries">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Emergencias</span>
+                                <span class="stat-value" id="statEmergencies">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Profesional</span>
+                                <span class="stat-value" id="statProfessional">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Educativas</span>
+                                <span class="stat-value" id="statEducational">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages -->
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-intro">
+                            <i class="fas fa-hand-holding-medical"></i>
+                            <p>¡Hola! Soy MedeX, tu asistente médico inteligente. ¿En qué puedo ayudarte hoy?</p>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input -->
+                    <div class="chat-input-container">
+                        <div class="chat-input-wrapper">
+                            <textarea 
+                                id="messageInput" 
+                                class="chat-input" 
+                                placeholder="Escribe tu consulta médica aquí..."
+                                rows="1"
+                                onkeypress="handleKeyPress(event)"
+                            ></textarea>
+                            <button class="btn-send" id="sendButton" onclick="sendMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="chat-hints">
+                            <span class="hint-item" onclick="setMessage('¿Qué son los AINEs?')">
+                                <i class="fas fa-pills"></i> Medicamentos
+                            </span>
+                            <span class="hint-item" onclick="setMessage('Paciente con dolor torácico')">
+                                <i class="fas fa-heartbeat"></i> Caso clínico
+                            </span>
+                            <span class="hint-item" onclick="setMessage('¿Cuáles son los síntomas de diabetes?')">
+                                <i class="fas fa-question-circle"></i> Síntomas
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <p>
+                <i class="fas fa-shield-alt"></i>
+                MedeX v25.83 - Sistema de apoyo médico educativo. No reemplaza consulta profesional.
+            </p>
+            <p class="footer-links">
+                <a href="https://github.com/DeepRatAI/MedeX" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <span class="separator">|</span>
+                <a href="#" onclick="showAbout()">
+                    <i class="fas fa-info-circle"></i> Acerca de
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Procesando...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
