@@ -86,6 +86,31 @@ _Estos ejemplos demuestran la capacidad dual de MedeX v25.83 para adaptar respue
 
 ## 🚀 Inicio Rápido
 
+### 🌐 Interfaz Web (Nuevo)
+
+MedeX ahora incluye una **interfaz web moderna y profesional** lista para deployment en Hugging Face Spaces:
+
+- ✨ **UI de alta calidad** diseñada específicamente para aplicaciones médicas
+- 📱 **Responsive**: Funciona en desktop, tablet y móviles
+- 🚀 **Deploy fácil**: SDK Static para Hugging Face Spaces
+- 💬 **Chat en tiempo real**: Interfaz intuitiva y profesional
+
+**[📖 Ver guía completa de la interfaz web](WEB_INTERFACE_README.md)**
+**[🚀 Guía de deployment en HF Spaces](DEPLOYMENT_GUIDE.md)**
+**[🔐 Configuración de secrets](SECRET_CONFIG.md)**
+
+#### Inicio Rápido - Web Interface
+
+```bash
+# Configurar API key
+export MOONSHOT_API_KEY="tu-api-key-aqui"
+
+# Ejecutar servidor web
+python api_server.py
+
+# Abrir en navegador: http://localhost:7860
+```
+
 ### Prerrequisitos
 
 - Python 3.8+
