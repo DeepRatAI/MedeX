@@ -11,7 +11,7 @@
 
 > **Sistema Avanzado de IA Médica con detección inteligente de usuarios, protocolos de emergencia y base de conocimiento médico integral**
 
-MedeX representa una evolución sofisticada en la tecnología de IA médica. El proyecto abarca tanto el framework fundamental de MedeX como su implementación insignia **MedeX v25.83**, impulsado por **Kimi K2-0711-Preview** que adapta automáticamente las respuestas para profesionales de la salud y pacientes, proporcionando información médica precisa con protocolos de seguridad integrados.
+MedeX representa una evolución sofisticada en la tecnología de IA médica. El proyecto abarca tanto el framework fundamental de MedeX como su implementación insignia **MedeX v25.83**, impulsado por **Kimi K2-0711-Preview** que adapta automáticamente las respuestas para profesionales de la salud y estudiantes, proporcionando información médica precisa con protocolos de seguridad integrados.
 
 ## 🎯 Resumen del Proyecto
 
@@ -28,7 +28,7 @@ La arquitectura central de IA médica diseñada para:
 
 Nuestro asistente de IA médica insignia que incluye:
 
-- **Detección Automática de Usuarios**: Distingue entre profesionales de la salud y pacientes
+- **Detección Automática de Usuarios**: Distingue entre profesionales de la salud y estudiantes
 - **Respuestas Conscientes del Contexto**: Adapta el lenguaje y nivel de detalle según corresponda
 - **Detección de Emergencias**: Identifica automáticamente emergencias médicas con protocolos apropiados
 - **Streaming en Tiempo Real**: Respuestas progresivas para mejor experiencia de usuario
