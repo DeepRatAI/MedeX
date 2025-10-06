@@ -1,6 +1,14 @@
 # MedeX - Medical AI Intelligence System
 # Core dependencies for medical AI functionality
 
+# Web Framework
+Flask>=2.3.0
+flask-cors>=4.0.0
+gunicorn>=21.2.0
+
+# OpenAI client for Moonshot/Kimi API
+openai>=1.0.0
+
 # AI and Machine Learning
 torch>=1.9.0
 transformers>=4.21.0
@@ -19,7 +27,7 @@ websockets>=10.0
 
 # Image Processing (for medical imaging)
 Pillow>=8.3.0
-opencv-python>=4.5.0
+opencv-python-headless>=4.5.0
 
 # Database and Data Storage
 # sqlite3 is built-in with Python (no need to install)
