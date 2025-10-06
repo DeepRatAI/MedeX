@@ -8,12 +8,19 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install Python dependencies
+# Copy requirements first for better caching
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application files
-COPY . .
+# Copy the entire project structure
+COPY src/ ./src/
+COPY templates/ ./templates/
+COPY static/ ./static/
+COPY app.py .
+COPY README.md .
+
+# Ensure the src module is in the Python path
+ENV PYTHONPATH=/app:$PYTHONPATH
 
 # Expose port
 EXPOSE 7860
