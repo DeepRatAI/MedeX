@@ -14,6 +14,7 @@ Sistema médico completo sin modo fallback, 100% Kimi K2
 ✅ Branding actualizado v25.83
 """
 
+import os
 import asyncio
 import json
 import re
@@ -28,13 +29,23 @@ class MedeXv2583:
     """Sistema médico avanzado v25.83 con RAG integrado y detección mejorada"""
     
     def __init__(self):
-        # Cargar API key desde archivo
+        # Cargar API key desde archivo o variable de entorno
         try:
-            with open('api_key.txt', 'r') as f:
-                self.api_key = f.read().strip()
+            # Primero intentar desde variable de entorno (para HF Spaces)
+            self.api_key = os.environ.get('MOONSHOT_API_KEY')
+            
+            if not self.api_key:
+                # Si no está en env, leer desde archivo
+                with open('api_key.txt', 'r') as f:
+                    self.api_key = f.read().strip()
+            
+            if not self.api_key:
+                raise Exception("API key vacía")
+                
         except FileNotFoundError:
             print("❌ Error: Archivo 'api_key.txt' no encontrado.")
             print("💡 Crea el archivo 'api_key.txt' en la raíz del proyecto y pega tu API key de Moonshot")
+            print("💡 O configura la variable de entorno MOONSHOT_API_KEY")
             raise Exception("API key no configurada")
         except Exception as e:
             print(f"❌ Error leyendo API key: {e}")
