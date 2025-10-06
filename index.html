@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedeX - Asistente Médico Inteligente</title>
+    <style>
+        /* Inline all CSS here for static deployment */
+        :root {
+            --primary-color: #0066CC;
+            --secondary-color: #00A8E8;
+            --success-color: #00C896;
+            --warning-color: #FFA726;
+            --danger-color: #EF5350;
+            --bg-primary: #F8FAFB;
+            --bg-secondary: #FFFFFF;
+            --text-primary: #1A202C;
+            --text-secondary: #718096;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        /* ...existing code from styles.css... */
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- ...existing code from templates/index.html body content... -->
+    
+    <script>
+        // Inline all JavaScript here for static deployment
+        // Update API endpoint to use HF Spaces URL
+        const API_BASE = window.location.hostname === 'localhost' 
+            ? 'http://localhost:7860' 
+            : `https://${window.location.hostname}`;
+            
+        class MedeXApp {
+            // ...existing code from app.js...
+            
+            async sendQuery() {
+                const query = this.queryInput.value.trim();
+                if (!query) return;
+
+                // ...existing code...
+
+                try {
+                    const response = await fetch(`${API_BASE}/api/analyze`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            query: query,
+                            patient_info: this.getPatientInfo()
+                        })
+                    });
+
+                    // ...existing code...
+                } catch (error) {
+                    // ...existing code...
+                }
+            }
+        }
+
+        // Initialize app when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new MedeXApp();
+        });
+    </script>
+</body>
+</html>
